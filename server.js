@@ -1,5 +1,6 @@
-require('dotenv').config({ path: '../.env' });
+require('dotenv').config({ path: './.env' });
 const express = require('express');
+const path = require('path');
 const multer = require('multer');
 const csv = require('csv-parser');
 const fs = require('fs');
@@ -13,10 +14,10 @@ app.use(express.json({ limit: '100mb' }));
 app.use(express.urlencoded({ limit: '100mb', extended: true }));
 
 // Serve static files from public directory
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Configure multer for file upload
-const upload = multer({ dest: 'uploads/' });
+const upload = multer({ dest: path.join(__dirname, 'uploads/') });
 
 // Environment variables
 const API_KEY = process.env.API_KEY;
